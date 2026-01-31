@@ -9,6 +9,14 @@ namespace APIExamen
     {
         private readonly HttpClient _http = new HttpClient();
 
+        public UserServices()
+        {
+            _http = new HttpClient
+            {
+                Timeout = TimeSpan.FromSeconds(5)
+            };
+        }
+
         public async Task<List<User>> GetUsersAsync()
         {
             try
@@ -19,8 +27,7 @@ namespace APIExamen
             }
             catch (Exception ex)
             {
-            return new List<User>();
-            throw new Exception("La API está caída", ex);
+                throw new Exception("La API está caída", ex);
             }
         }
     }
